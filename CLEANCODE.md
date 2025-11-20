@@ -35,11 +35,6 @@ Este documento contém a análise inicial do código com base nos critérios de 
 - Repetição da conversão de datas (new Date(...)) em createNews e updateNews: extrair para função utilitária.
 - Nenhum tratamento de erro interno; os erros do Prisma são repassados para serem tratados pelo middleware ou controller.
 
-### arquivo: news-service.ts
-- 
-
-### arquivo: news-controller.ts
-- 
 ---
 
 ## Observações
