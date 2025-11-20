@@ -29,14 +29,6 @@ Este documento contém a análise inicial do código com base nos critérios de 
 ### arquivo: news-schema.ts
 - Nenhum problema encontrado, arquivo segue os padrões de Clean Code.
 
-### arquivo: news-repository.ts
-- 
-
-### arquivo: news-service.ts
-- 
-
-### arquivo: news-controller.ts
-- 
 ---
 
 ## Observações
