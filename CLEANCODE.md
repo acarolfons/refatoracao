@@ -18,11 +18,25 @@ Este documento contém a análise inicial do código com base nos critérios de 
 
 ## Problemas encontrados por arquivo
 
-### arquivo: errorHandle.ts
+### arquivo: error-handle.ts
 - Os nomes da função e das variáveis estão claros e consistentes.
 - A lógica de definição dos status HTTP pode ser otimizada usando um mapeamento (name → status), reduzindo repetição e aplicando melhor o princípio DRY.
 - O encadeamento de `else if` aumenta a complexidade visual; pode ser simplificado para melhorar a legibilidade do código.
 
+### arquivo: schema-handler.ts
+- Nenhum problema encontrado, arquivo segue os padrões de Clean Code.
+ 
+### arquivo: news-schema.ts
+- Nenhum problema encontrado, arquivo segue os padrões de Clean Code.
+
+### arquivo: news-repository.ts
+- 
+
+### arquivo: news-service.ts
+- 
+
+### arquivo: news-controller.ts
+- 
 ---
 
 ## Observações
