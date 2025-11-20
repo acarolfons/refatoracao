@@ -35,7 +35,13 @@ Este documento contém a análise inicial do código com base nos critérios de 
 - Repetição da conversão de datas (new Date(...)) em createNews e updateNews: extrair para função utilitária.
 - Nenhum tratamento de erro interno; os erros do Prisma são repassados para serem tratados pelo middleware ou controller.
 
----
+### arquivo: news-service.ts
+- Nomes das funções e variáveis foram traduzidos para inglês, agora estão claros e consistentes.
+- Funções principais têm responsabilidades únicas, mas a função `validate` mistura três tipos de validação (unicidade do título, tamanho do texto e data de publicação); poderia ser dividida em funções auxiliares para melhorar legibilidade e seguir princípio de responsabilidade única.
+- Erros são lançados diretamente com objetos `{ name, message }`; seria mais consistente usar `AppError` para padronizar com o middleware de tratamento de erros.
+- Conversão de datas em `validate` (`new Date(newsData.publicationDate)`) poderia reutilizar a função utilitária `parseDate` do repository para consistência e evitar repetição.
+- Fluxo das funções é legível, mas pequenas melhorias de legibilidade podem ser aplicadas extraindo validações em funções auxiliares.
+
 
 ## Observações
 Arquivos de teste foram desconsiderados conforme os requisitos do projeto.

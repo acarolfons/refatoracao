@@ -42,3 +42,11 @@ export async function removeNews(id: number) {
     where: { id }
   });
 }
+
+export function getNoticias() {
+  throw new Error("Function not implemented.");
+}
+export function createNoticia(newsData: CreateNewsData) {
+  throw new Error("Function not implemented.");
+}
+
