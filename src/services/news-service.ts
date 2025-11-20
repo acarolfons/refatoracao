@@ -3,8 +3,18 @@ import { AlterNewsData, CreateNewsData } from "../repositories/news-repository";
 
 const MIN_TEXT_LENGTH = 500;
 
-export async function getNews() {
-  return newsRepository.getNews(); 
+export interface GetNewsParams {
+  page?: number;
+  order?: "asc" | "desc";
+  title?: string;
+}
+
+export async function getNews(params: GetNewsParams = {}) {
+  const page = params.page ?? 1;
+  const order = params.order ?? "desc";
+  const title = params.title;
+
+  return newsRepository.getNewsWithFilters({ page, order, title });
 }
 
 export async function getSpecificNews(id: number) {

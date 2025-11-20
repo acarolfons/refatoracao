@@ -10,6 +10,28 @@ function parseDate(date: string | Date) {
   return new Date(date);
 }
 
+export interface GetNewsWithFiltersParams {
+  page: number;
+  order: "asc" | "desc";
+  title?: string;
+}
+
+export async function getNewsWithFilters(params: GetNewsWithFiltersParams) {
+  const take = 10;
+  const skip = (params.page - 1) * take;
+
+  return prisma.news.findMany({
+    where: params.title ? {
+      title: { contains: params.title, mode: "insensitive" }
+    } : {},
+    orderBy: {
+      publicationDate: params.order
+    },
+    skip,
+    take
+  });
+}
+
 export function getNews() {
   return prisma.news.findMany({
     orderBy: {

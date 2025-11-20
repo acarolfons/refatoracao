@@ -13,7 +13,12 @@ function validateId(id: string) {
 }
 
 export async function getNews(req: Request, res: Response) {
-  const news = await service.getNews();
+  const { page, order, title } = req.query;
+  const news = await service.getNews({
+    page: page ? parseInt(page as string) : undefined,
+    order: order as "asc" | "desc" | undefined,
+    title: title as string | undefined
+  });
   return res.send(news);
 }
 
