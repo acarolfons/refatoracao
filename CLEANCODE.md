@@ -29,6 +29,17 @@ Este documento contém a análise inicial do código com base nos critérios de 
 ### arquivo: news-schema.ts
 - Nenhum problema encontrado, arquivo segue os padrões de Clean Code.
 
+### arquivo: news-repository.ts
+- Funções estão em português: renomear para inglês consistente (getNews, getNewsById, createNews, updateNews, removeNews).
+- String "desc" usada diretamente no orderBy: extrair para constante semântica (ex: ORDER_DESC).
+- Repetição da conversão de datas (new Date(...)) em createNews e updateNews: extrair para função utilitária.
+- Nenhum tratamento de erro interno; os erros do Prisma são repassados para serem tratados pelo middleware ou controller.
+
+### arquivo: news-service.ts
+- 
+
+### arquivo: news-controller.ts
+- 
 ---
 
 ## Observações
