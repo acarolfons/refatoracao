@@ -42,6 +42,12 @@ Este documento contém a análise inicial do código com base nos critérios de 
 - Conversão de datas em `validate` (`new Date(newsData.publicationDate)`) poderia reutilizar a função utilitária `parseDate` do repository para consistência e evitar repetição.
 - Fluxo das funções é legível, mas pequenas melhorias de legibilidade podem ser aplicadas extraindo validações em funções auxiliares.
 
+### arquivo: news-controller.ts
+- Nomes das funções são semânticos e consistentes.
+- Validação de ID repetida foi extraída para função auxiliar `validateId` para reduzir duplicação.
+- Erros padronizados (`{ name, message }`) permitem compatibilidade direta com middleware de tratamento.
+- Funções são pequenas, com responsabilidade única (receber request, chamar service e enviar response).
+- Código legível e organizado, fácil de manter.
 
 ## Observações
 Arquivos de teste foram desconsiderados conforme os requisitos do projeto.
