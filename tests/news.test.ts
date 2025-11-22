@@ -53,6 +53,69 @@ describe("GET /news", () => {
     expect(status).toBe(httpStatus.BAD_REQUEST);
   });
 
+  it("should return paginated results", async () => {
+    await Promise.all(
+      Array.from({ length: 15 }, () => persistNewRandomNews())
+    );
+
+    const { status, body } = await api.get("/news?page=2");
+
+    expect(status).toBe(httpStatus.OK);
+    expect(body.length).toBe(5);
+  });
+
+  it("should return results ordered ascending by publicationDate", async () => {
+    const oldData = generateRandomNews();
+    oldData.publicationDate = new Date("2099-01-01");
+
+    const newData = generateRandomNews();
+    newData.publicationDate = new Date("2100-01-01");
+
+    const oldNews = await prisma.news.create({ data: oldData });
+    const newNews = await prisma.news.create({ data: newData });
+
+    const { status, body } = await api.get("/news?order=asc");
+
+    expect(status).toBe(httpStatus.OK);
+    expect(body[0].id).toBe(oldNews.id);
+    expect(body[1].id).toBe(newNews.id);
+  });
+
+
+  it("should return results ordered descending by publicationDate", async () => {
+    const oldData = generateRandomNews();
+    oldData.publicationDate = new Date("2099-01-01");
+
+    const newData = generateRandomNews();
+    newData.publicationDate = new Date("2100-01-01");
+
+    const oldNews = await prisma.news.create({ data: oldData });
+    const newNews = await prisma.news.create({ data: newData });
+
+    const { status, body } = await api.get("/news?order=desc");
+
+    expect(status).toBe(httpStatus.OK);
+    expect(body[0].id).toBe(newNews.id);
+    expect(body[1].id).toBe(oldNews.id);
+  });
+
+  it("should filter news by title (LIKE search)", async () => {
+    await prisma.news.create({
+      data: { ...generateRandomNews(), title: "Driven Bootcamp News" }
+    });
+
+    await prisma.news.create({
+      data: { ...generateRandomNews(), title: "Another Random News" }
+    });
+
+    const { status, body } = await api.get("/news?title=Driven");
+
+    expect(status).toBe(httpStatus.OK);
+    expect(body.length).toBe(1);
+    expect(body[0].title).toContain("Driven");
+  });
+
+
 });
 
 describe("POST /news", () => {
